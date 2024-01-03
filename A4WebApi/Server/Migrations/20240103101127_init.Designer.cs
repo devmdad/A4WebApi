@@ -11,7 +11,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace A4WebApi.Server.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20240102155236_init")]
+    [Migration("20240103101127_init")]
     partial class init
     {
         /// <inheritdoc />
@@ -23,6 +23,23 @@ namespace A4WebApi.Server.Migrations
                 .HasAnnotation("Relational:MaxIdentifierLength", 128);
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
+
+            modelBuilder.Entity("A4WebApi.Shared.Models.Course", b =>
+                {
+                    b.Property<string>("Id")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<int>("Marks")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Courses");
+                });
 
             modelBuilder.Entity("A4WebApi.Shared.Models.Doctor", b =>
                 {
@@ -74,6 +91,31 @@ namespace A4WebApi.Server.Migrations
                     b.ToTable("Patients");
                 });
 
+            modelBuilder.Entity("A4WebApi.Shared.Models.Student", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<int>("CourseId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("CourseId1")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("CourseId1");
+
+                    b.ToTable("Students");
+                });
+
             modelBuilder.Entity("A4WebApi.Shared.Models.Patients", b =>
                 {
                     b.HasOne("A4WebApi.Shared.Models.Doctor", "Doctor")
@@ -83,6 +125,18 @@ namespace A4WebApi.Server.Migrations
                         .IsRequired();
 
                     b.Navigation("Doctor");
+                });
+
+            modelBuilder.Entity("A4WebApi.Shared.Models.Student", b =>
+                {
+                    b.HasOne("A4WebApi.Shared.Models.Course", null)
+                        .WithMany("Students")
+                        .HasForeignKey("CourseId1");
+                });
+
+            modelBuilder.Entity("A4WebApi.Shared.Models.Course", b =>
+                {
+                    b.Navigation("Students");
                 });
 
             modelBuilder.Entity("A4WebApi.Shared.Models.Doctor", b =>

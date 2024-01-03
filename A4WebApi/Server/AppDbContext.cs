@@ -11,5 +11,7 @@ namespace A4WebApi.Server
 
         public DbSet<Doctor> Doctors { get; set; }
         public DbSet<Patients> Patients { get; set; }
+        public DbSet<Course> Courses { get; set; }
+        public DbSet<Student> Students { get; set; }
     }
 }

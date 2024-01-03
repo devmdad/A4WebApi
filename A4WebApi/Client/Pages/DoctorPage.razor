@@ -1,5 +1,8 @@
 ﻿@using A4WebApi.Shared.Models;
 @page "/submitdata"
+@using System.Net.Http
+@using System.Net.Http.Json
+@using System.Text.Json;
 @inject HttpClient Http
 
 <h3>DoctorPage</h3>
@@ -53,7 +56,9 @@
 </table> *@
 
 @code {
-    private Doctor doc = new Doctor();
+    Doctor doc = new Doctor();
+
+    // Doctor json = JsonSerializer.Serialize(doc);
 
     List<Doctor> doctors = new List<Doctor>();
 
@@ -69,21 +74,21 @@
     // }
     protected override async Task OnInitializedAsync()
     {
-        doctors = await Http.GetFromJsonAsync<List<Doctor>>("api/v1/doctor/pass");
+        doctors = await Http.GetFromJsonAsync<List<Doctor>>("api/v2doctor/pass");
     }
 
     protected override async Task OnAfterRenderAsync(bool firstRender)
     {
-        doctors = await Http.GetFromJsonAsync<List<Doctor>>("api/v1/doctor/pass");
+        doctors = await Http.GetFromJsonAsync<List<Doctor>>("api/v2/doctor/pass");
 
     }
 
-    
 
-    public async void HandleValidSubmit()
-    {
         
-        await Http.PostAsJsonAsync<Doctor>("/api/v1/doctor/postdoctor", doc);
+    private async Task HandleValidSubmit()
+    {
+        // var addItem = new { DoctorId = doc.DoctorId, Name = doc.Name, Specialization = doc.Specialization, AppointmentPrice = doc.AppointmentPrice };
+        await Http.PostAsJsonAsync<Doctor>("api/v2/doctor/savedoctor", doc);
         // await dataService.SubmitData(doc);
     }
 

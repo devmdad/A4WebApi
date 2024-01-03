@@ -3,11 +3,11 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.7.34031.279
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "A4WebApi.Server", "A4WebApi\Server\A4WebApi.Server.csproj", "{0B35B2A2-A289-4511-B730-576EE078CA99}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "A4WebApi.Server", "A4WebApi\Server\A4WebApi.Server.csproj", "{0B35B2A2-A289-4511-B730-576EE078CA99}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "A4WebApi.Client", "A4WebApi\Client\A4WebApi.Client.csproj", "{4E45FE8D-73C8-48B7-B104-B19D2D9FD36F}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "A4WebApi.Client", "A4WebApi\Client\A4WebApi.Client.csproj", "{4E45FE8D-73C8-48B7-B104-B19D2D9FD36F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "A4WebApi.Shared", "A4WebApi\Shared\A4WebApi.Shared.csproj", "{59E30915-B502-4297-8FE9-250A6E2CE3A8}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "A4WebApi.Shared", "A4WebApi\Shared\A4WebApi.Shared.csproj", "{59E30915-B502-4297-8FE9-250A6E2CE3A8}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

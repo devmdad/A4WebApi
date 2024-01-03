@@ -1,0 +1,79 @@
+﻿@page "/stdpage"
+@using A4WebApi.Shared.Models;
+@inject HttpClient Http
+<h3>Student Page</h3>
+
+<EditForm Model="@std" OnValidSubmit="@HandleValidSubmit">
+
+    <div class="form-group">
+        <label for="CId">ID:</label>
+        <InputNumber id="CId" @bind-Value="std.Id" class="form-control" />
+    </div>
+
+    <div class="form-group">
+        <label for="Name">Name:</label>
+        <InputText id="Name" @bind-Value="std.Name" class="form-control" />
+    </div>
+
+    <div class="form-group">
+        <label for="Marks">Marks:</label>
+        <InputNumber id="Marks" @bind-Value="std.CourseId" class="form-control" />
+    </div>
+
+    @* <div class="form-group">
+    <label for="stds">Number of Students:</label>
+    <InputNumber id="stds" @bind-Value="cs.Students" class="form-control" />
+    </div> *@
+
+    <button formaction="post" type="submit" class="btn btn-primary">Save</button>
+</EditForm>
+
+<table>
+
+    <thead>Id</thead>
+    <thead>Name</thead>
+    <thead>Marks</thead>
+    @* <thead>Students</thead> *@
+
+
+    @foreach (Student s in students)
+    {
+        <tr>
+            <td>@s.Id</td>
+            <td>@s.Name</td>
+            <td>@s.CourseId</td>
+            @* <td>@c.Students</td> *@
+
+        </tr>
+
+
+
+    }
+</table>
+
+@code {
+    public Student std = new Student();
+
+    List<Student> students = new List<Student>();
+
+
+    protected override async Task OnInitializedAsync()
+    {
+        students = await Http.GetFromJsonAsync<List<Student>>("api/student/pass");
+    }
+
+    protected override async Task OnAfterRenderAsync(bool firstRender)
+    {
+        students = await Http.GetFromJsonAsync<List<Student>>("api/student/pass");
+
+    }
+
+
+
+    private async Task HandleValidSubmit()
+    {
+        // var addItem = new { DoctorId = doc.DoctorId, Name = doc.Name, Specialization = doc.Specialization, AppointmentPrice = doc.AppointmentPrice };
+        await Http.PostAsJsonAsync<Student>("api/student/post", std);
+        // await dataService.SubmitData(doc);
+    }
+}

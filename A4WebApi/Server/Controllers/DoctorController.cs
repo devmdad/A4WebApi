@@ -4,7 +4,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace A4WebApi.Server.Controllers
 {
-    [Route("api/v1/[controller]")]
+    [Route("api/v2/[controller]")]
     [ApiController]
 
     public class DoctorController : Controller
@@ -22,7 +22,7 @@ namespace A4WebApi.Server.Controllers
             _appDbContext = appDbContext;
         }
 
-        [HttpGet]
+        [HttpGet("/pass")]
         public async Task<IList<Doctor>> GetDoctors()
         {
             try
@@ -52,9 +52,8 @@ namespace A4WebApi.Server.Controllers
             }
         }
 
-        [HttpPost]
-        [Route("/SaveDoctor")]
-        public async Task<IActionResult> SaveDoctor(Doctor doctor)
+        [HttpPost("/savedoctor")]
+        public async Task<IActionResult> SaveDoctor([FromBody] Doctor doctor)
         {
             try
             {
